@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Badr ❤️ Yasmin</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffc0cb, #ff6b81);
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 100px;
+      color: white;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: #ff4757;
+      color: white;
+    }
+
+    #noBtn {
+      background: #2f3542;
+      color: white;
+      position: absolute;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #celebration {
+      position: fixed;
+      inset: 0;
+      background: #ff0033;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .heart {
+      position: absolute;
+      top: -20px;
+      font-size: 24px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Will you be my Valentine? 💌</h1>
+
+<button id="yesBtn">YES 💖</button>
+<button id="noBtn">No 😏</button>
+
+<div id="celebration" class="hidden">
+  <h1>SHE SAID YES!!! 💍❤️</h1>
+  <h2>I love you more than words can explain 💖</h2>
+</div>
+
+<script>
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const celebration = document.getElementById('celebration');
+let yesSize = 1;
+
+// Make NO run away
+noBtn.addEventListener('mouseenter', () => {
+  noBtn.innerText = "Are you sure? 😅";
+  noBtn.style.top = Math.random() * 80 + 'vh';
+  noBtn.style.left = Math.random() * 80 + 'vw';
+
+  yesSize += 0.2;
+  yesBtn.style.transform = `scale(${yesSize})`;
+});
+
+// YES click celebration
+yesBtn.addEventListener('click', () => {
+  celebration.classList.remove('hidden');
+  document.body.style.background = '#ff0033';
+
+  confetti({
+    particleCount: 200,
+    spread: 120,
+    origin: { y: 0.6 }
+  });
+
+  for (let i = 0; i < 40; i++) {
+    const heart = document.createElement('div');
+    heart.innerHTML = '❤️';
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+    document.body.appendChild(heart);
+  }
+});
+</script>
+
+</body>
+</html>
